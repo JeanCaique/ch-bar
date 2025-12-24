@@ -1,50 +1,117 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Chá Bar – Taiane & Caique</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Chá Bar - Taine & Caique</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="container">
-  <h1>🍻 Chá Bar</h1>
-  <h2>Taiane & Caique</h2>
-  <p>Confirme sua presença e escolha um presente 💝</p>
+  <!-- CABEÇALHO -->
+  <header>
+    <div class="container">
+      <div class="couple-names">
+        <span class="name-left">Taine</span>
+        <span class="heart-icon">&</span>
+        <span class="name-right">Caique</span>
+      </div>
 
- 
-  <div class="card">
-    <h3>Login</h3>
-    <input id="name" type="text" placeholder="Seu nome">
-    <input id="email" type="email" placeholder="Email (opcional)">
-    <button type="button" onclick="login()">Entrar</button>
-  </div>
+      <h1>Chá Bar <span class="highlight">do Casal</span></h1>
 
- 
-  <div class="card">
-    <h3>Status</h3>
-    <p id="status">👤 Nenhum convidado logado</p>
-  </div>
+      <div class="event-info">
+        <div class="info-item">
+          <i class="fas fa-calendar-alt"></i>
+          <span>17 de Maio de 2026</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-clock"></i>
+          <span>13:00 horas</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Avenida Brasil, 1964 - Rochdale, Osasco</span>
+        </div>
+      </div>
 
-  
-  <div class="card">
-    <h3>Presença</h3>
-    <button type="button" onclick="setPresence(true)">✅ Vou comparecer</button>
-    <button type="button" onclick="setPresence(false)">❌ Não poderei ir</button>
-  </div>
+      <div class="theme">
+        <p><i class="fas fa-heart"></i> Celebrando nosso amor e nossa nova casa</p>
+      </div>
+    </div>
+  </header>
 
-  <div class="card">
-    <h3>Lista de Presentes 🎁</h3>
-    <select id="giftSelect">
-      <option value="">Selecione um presente</option>
-    </select>
-    <button type="button" onclick="chooseGift()">Escolher Presente</button>
-    <p id="gift"></p>
-  </div>
-</div>
+  <main class="container">
 
+    <!-- MENSAGEM -->
+    <section class="card">
+      <div class="message-content">
+        <h2><i class="fas fa-heart"></i> Nossa Jornada</h2>
+        <p>Queridos amigos e familiares,</p>
+        <p>Estamos começando uma nova fase da nossa vida juntos e nada seria melhor do que celebrar com vocês!</p>
+        <p>Este chá é especial para mobiliar nosso primeiro lar com muito amor.</p>
+        <p class="signature">Com carinho,<br><strong>Taine & Caique</strong></p>
+      </div>
+    </section>
 
-<script src="script.js"></script>
+    <!-- CONFIRMAÇÃO DE PRESENÇA -->
+    <section class="card">
+      <h2><i class="fas fa-check-circle"></i> Confirmar Presença</h2>
+
+      <div class="form-group">
+        <input type="text" id="nome" placeholder="Digite seu nome completo">
+        <input type="email" id="email" placeholder="Digite seu e-mail (opcional)">
+        <select id="acompanhantes">
+          <option value="0">Vou sozinho(a)</option>
+          <option value="1">+ 1 acompanhante</option>
+          <option value="2">+ 2 acompanhantes</option>
+          <option value="3">+ 3 acompanhantes</option>
+        </select>
+
+        <button id="confirmar" class="btn-confirmar">
+          <i class="fas fa-check"></i> Confirmar Presença
+        </button>
+      </div>
+
+      <div id="msgPresenca" class="mensagem-sucesso">
+        <i class="fas fa-check-circle"></i>
+        <span>Presença confirmada com sucesso! 💕</span>
+      </div>
+
+      <div class="contador">
+        <p><span id="totalConfirmados">0</span> pessoas já confirmaram presença</p>
+      </div>
+    </section>
+
+    <!-- LISTA DE PRESENTES -->
+    <section class="card">
+      <h2><i class="fas fa-gift"></i> Lista de Presentes</h2>
+      <div class="presentes" id="listaPresentes"></div>
+    </section>
+
+    <!-- CONVIDADOS -->
+    <section class="card">
+      <h2><i class="fas fa-users"></i> Amigos Confirmados</h2>
+      <div class="convidados-lista" id="listaConvidados">
+        <p>Nenhuma confirmação ainda.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <div class="container">
+      <h3>Chá Bar - Taine & Caique</h3>
+      <p>Celebrando amor e o início da nossa vida a dois ❤️</p>
+      <p><i class="fas fa-envelope"></i> cha.bar.taine.caique@gmail.com</p>
+      <p class="copyright">Com amor, Taine & Caique © 2026</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

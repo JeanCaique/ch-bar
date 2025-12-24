@@ -1,136 +1,135 @@
-let userName = localStorage.getItem("userName") || "";
+document.addEventListener('DOMContentLoaded', function () {
 
-const gifts = [
-  "Jogo de panelas",
-  "Frigideira antiaderente",
-  "Forma de bolo quadrada",
-  "Forma de bolo redonda",
-  "Forma de pudim",
-  "Panela de pressão",
-  "Assadeiras",
-  "Escorredor de louça",
-  "Escorredor de macarrão e forma de gelo",
-  "Jogo de potes plásticos e panos de prato",
-  "Potes de vidro",
-  "Garrafa de água",
-  "Tábua de corte (madeira ou vidro)",
-  "Conjunto de facas",
-  "Jogo de utensílios (concha, espátula, pegador)",
-  "Abridor de garrafa e vinho e peneira",
-  "Triturador de alho",
-  "Triturador de alimentos",
-  "Liquidificador",
-  "Mixer",
-  "Sanduicheira",
-  "Cafeteira",
-  "Jarra de vidro",
-  "Kit de churrasco",
-  "Porta mantimentos",
-  "Lixeira de cozinha",
-  "Tapete passadeira",
-  "Lixeira banheiro",
-  "Cabides + varal de meias",
-  "Varal de chão",
-  "Esfregão / Mop",
-  "Jogo de pratos",
-  "Jogo de copos",
-  "Taças de vinho",
-  "Taças de água",
-  "Taças de cerveja",
-  "Caneca de chopp",
-  "Jogo de xícaras de café",
-  "Baleiro de vidro",
-  "Boleira de vidro",
-  "Sal e pimenteiro",
-  "Travessas de vidro",
-  "Jogo de sobremesas",
-  "Garrafa de café",
-  "Fruteira de mesa"
-];
+  const presentes = [
+    { id: 1, nome: "Liquidificador", categoria: "eletro", descricao: "Para vitaminas, sucos e smoothies deliciosos", reservado: false, reservadoPor: "" },
+    { id: 2, nome: "Mixer + Ventilador", categoria: "eletro", descricao: "Mixer para preparos rápidos + Ventilador para os dias quentes", reservado: false, reservadoPor: "" },
+    { id: 3, nome: "Sanduicheira", categoria: "eletro", descricao: "Para lanches rápidos e quentinhos", reservado: false, reservadoPor: "" },
+    { id: 4, nome: "Cafeteira", categoria: "eletro", descricao: "Para cafés especiais todas as manhãs", reservado: false, reservadoPor: "" },
 
-const giftSelect = document.getElementById("giftSelect");
-const statusEl = document.getElementById("status");
-const giftEl = document.getElementById("gift");
+    { id: 5, nome: "Jogo de Panelas", categoria: "panelas", descricao: "Conjunto completo para cozinhar refeições especiais", reservado: false, reservadoPor: "" },
+    { id: 6, nome: "Panela de Pressão", categoria: "panelas", descricao: "Para cozimentos rápidos e nutritivos", reservado: false, reservadoPor: "" },
+    { id: 7, nome: "Frigideira Antiaderente", categoria: "panelas", descricao: "Ideal para omeletes, carnes e frituras saudáveis", reservado: false, reservadoPor: "" },
 
-let chosenGifts = JSON.parse(localStorage.getItem("chosenGifts")) || [];
-let presence = localStorage.getItem("presence");
+    { id: 11, nome: "Conjunto de Facas", categoria: "utensilios", descricao: "Facas afiadas para diferentes usos", reservado: false, reservadoPor: "" },
+    { id: 17, nome: "Kit de Churrasco", categoria: "utensilios", descricao: "Utensílios completos para churrascos", reservado: false, reservadoPor: "" },
 
+    { id: 23, nome: "Jogo de Pratos", categoria: "loucas", descricao: "Conjunto completo para refeições", reservado: false, reservadoPor: "" },
+    { id: 25, nome: "Taças de Vinho", categoria: "loucas", descricao: "Para momentos especiais", reservado: false, reservadoPor: "" },
 
-gifts.forEach(gift => {
-  const option = document.createElement("option");
-  option.value = gift;
-  option.textContent = gift;
+    { id: 32, nome: "Boleira de Vidro", categoria: "decoracao", descricao: "Para bolos e tortas", reservado: false, reservadoPor: "" },
+    { id: 36, nome: "Escorredor de Louça", categoria: "limpeza", descricao: "Para secar louças", reservado: false, reservadoPor: "" }
+  ];
 
-  if (chosenGifts.includes(gift)) {
-    option.disabled = true;
-    option.textContent += " (já escolhido)";
-  }
+  let convidadosConfirmados =
+    JSON.parse(localStorage.getItem('convidadosChaBarTaineCaique')) || [];
 
-  giftSelect.appendChild(option);
-});
+  let listaPresentesAtualizada =
+    JSON.parse(localStorage.getItem('listaPresentesChaBarTaineCaique')) || presentes;
 
+  const listaPresentesEl = document.getElementById('listaPresentes');
+  const btnConfirmar = document.getElementById('confirmar');
+  const msgPresenca = document.getElementById('msgPresenca');
+  const totalConfirmadosEl = document.getElementById('totalConfirmados');
+  const listaConvidadosEl = document.getElementById('listaConvidados');
+  const filtroBtns = document.querySelectorAll('.filtro-btn');
 
-if (userName) {
-  statusEl.innerText = "👤 Convidado: " + userName;
-}
+  atualizarContador();
+  exibirPresentes('todos');
+  exibirConvidados();
 
-if (presence) {
-  statusEl.innerText =
-    userName + (presence === "true" ? " ✅ vai comparecer" : " ❌ não poderá ir");
-}
+  btnConfirmar.addEventListener('click', function () {
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const acompanhantes = parseInt(document.getElementById('acompanhantes').value);
 
-
-window.login = function () {
-  const name = document.getElementById("name").value.trim();
-
-  if (!name) {
-    alert("Digite seu nome");
-    return;
-  }
-
-  userName = name;
-  localStorage.setItem("userName", userName);
-  statusEl.innerText = "👤 Convidado: " + userName;
-};
-
-window.setPresence = function (value) {
-  if (!userName) {
-    alert("Faça login primeiro");
-    return;
-  }
-
-  localStorage.setItem("presence", value);
-  statusEl.innerText =
-    userName + (value ? " ✅ vai comparecer" : " ❌ não poderá ir");
-};
-
-window.chooseGift = function () {
-  if (!userName) {
-    alert("Faça login primeiro");
-    return;
-  }
-
-  const gift = giftSelect.value;
-  if (!gift) {
-    alert("Selecione um presente");
-    return;
-  }
-
-  if (chosenGifts.includes(gift)) {
-    alert("Esse presente já foi escolhido");
-    return;
-  }
-
-  chosenGifts.push(gift);
-  localStorage.setItem("chosenGifts", JSON.stringify(chosenGifts));
-  giftEl.innerText = "🎁 Presente escolhido: " + gift;
-
-  [...giftSelect.options].forEach(opt => {
-    if (opt.value === gift) {
-      opt.disabled = true;
-      opt.textContent += " (já escolhido)";
+    if (!nome) {
+      alert('Digite seu nome para confirmar presença.');
+      return;
     }
+
+    convidadosConfirmados.push({
+      id: Date.now(),
+      nome,
+      email: email || 'Não informado',
+      acompanhantes,
+      data: new Date().toLocaleDateString('pt-BR'),
+      hora: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+    });
+
+    localStorage.setItem(
+      'convidadosChaBarTaineCaique',
+      JSON.stringify(convidadosConfirmados)
+    );
+
+    msgPresenca.querySelector('span').textContent =
+      acompanhantes > 0
+        ? `Presença confirmada para ${acompanhantes + 1} pessoas! 💕`
+        : 'Presença confirmada com sucesso! 💕';
+
+    msgPresenca.style.display = 'flex';
+
+    atualizarContador();
+    exibirConvidados();
   });
 
-  alert("Obrigado! Presente registrado ✅");
-};
+  function exibirPresentes(categoria) {
+    listaPresentesEl.innerHTML = '';
+
+    const filtrados = categoria === 'todos'
+      ? listaPresentesAtualizada
+      : listaPresentesAtualizada.filter(p => p.categoria === categoria);
+
+    filtrados.forEach(presente => {
+      const div = document.createElement('div');
+      div.className = `item-presente ${presente.reservado ? 'reservado' : ''}`;
+
+      div.innerHTML = `
+        <h3>${presente.nome}</h3>
+        <p>${presente.descricao}</p>
+        ${presente.reservado
+          ? `<small>Reservado por: ${presente.reservadoPor}</small>`
+          : `<button class="btn-reservar" data-id="${presente.id}">Presentear o casal</button>`
+        }
+      `;
+
+      listaPresentesEl.appendChild(div);
+    });
+
+    document.querySelectorAll('.btn-reservar').forEach(btn => {
+      btn.onclick = () => reservarPresente(parseInt(btn.dataset.id));
+    });
+  }
+
+  function reservarPresente(id) {
+    const nome = prompt('Digite seu nome para presentear Taine e Caique:');
+    if (!nome) return;
+
+    const presente = listaPresentesAtualizada.find(p => p.id === id);
+    if (!presente || presente.reservado) return;
+
+    presente.reservado = true;
+    presente.reservadoPor = nome;
+
+    localStorage.setItem(
+      'listaPresentesChaBarTaineCaique',
+      JSON.stringify(listaPresentesAtualizada)
+    );
+
+    alert(`Obrigado, ${nome}! 💕`);
+    exibirPresentes('todos');
+  }
+
+  function exibirConvidados() {
+    listaConvidadosEl.innerHTML = '';
+    convidadosConfirmados.forEach(c =>
+      listaConvidadosEl.innerHTML += `<p><strong>${c.nome}</strong></p>`
+    );
+  }
+
+  function atualizarContador() {
+    let total = 0;
+    convidadosConfirmados.forEach(c => total += 1 + c.acompanhantes);
+    totalConfirmadosEl.textContent = total;
+  }
+
+});
