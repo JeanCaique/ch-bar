@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <title>Chá Bar - Taine & Caique</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎁</text></svg>">
 </head>
 
 <body>
@@ -46,13 +46,13 @@
 
   <main class="container">
 
-    <!-- MENSAGEM -->
-    <section class="card">
+  
+      </div>
       <div class="message-content">
         <h2><i class="fas fa-heart"></i> Nossa Jornada</h2>
         <p>Queridos amigos e familiares,</p>
         <p>Estamos começando uma nova fase da nossa vida juntos e nada seria melhor do que celebrar com vocês!</p>
-        <p>Este chá é especial para mobiliar nosso primeiro lar com muito amor.</p>
+        <p>Este chá é especial para mobiliar nosso primeiro lar com muito amor. Cada presente será uma lembrança carinhosa de cada um de vocês em nosso novo lar.</p>
         <p class="signature">Com carinho,<br><strong>Taine & Caique</strong></p>
       </div>
     </section>
@@ -60,6 +60,7 @@
     <!-- CONFIRMAÇÃO DE PRESENÇA -->
     <section class="card">
       <h2><i class="fas fa-check-circle"></i> Confirmar Presença</h2>
+      <p>Confirme sua presença para nosso Chá Bar especial!</p>
 
       <div class="form-group">
         <input type="text" id="nome" placeholder="Digite seu nome completo">
@@ -83,20 +84,100 @@
 
       <div class="contador">
         <p><span id="totalConfirmados">0</span> pessoas já confirmaram presença</p>
+        <p class="small"><i class="fas fa-champagne-glasses"></i> Contamos com você!</p>
       </div>
     </section>
 
     <!-- LISTA DE PRESENTES -->
     <section class="card">
-      <h2><i class="fas fa-gift"></i> Lista de Presentes</h2>
+      <div class="section-header">
+        <h2><i class="fas fa-gift"></i> Lista de Presentes</h2>
+        <p class="subtitle">Escolha um presente e marque como "Reservado" para presentear nosso novo lar</p>
+      </div>
+      
+      <div class="filtros">
+        <button class="filtro-btn ativo" data-categoria="todos">Todos os Itens</button>
+        <button class="filtro-btn" data-categoria="eletro">Eletrodomésticos</button>
+        <button class="filtro-btn" data-categoria="panelas">Panelas e Formas</button>
+        <button class="filtro-btn" data-categoria="utensilios">Utensílios</button>
+        <button class="filtro-btn" data-categoria="loucas">Louças e Copos</button>
+        <button class="filtro-btn" data-categoria="decoracao">Decoração</button>
+        <button class="filtro-btn" data-categoria="limpeza">Limpeza</button>
+      </div>
+      
       <div class="presentes" id="listaPresentes"></div>
+      
+      <div class="instrucoes">
+        <h3><i class="fas fa-info-circle"></i> Como presentear:</h3>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <p>Escolha um item da lista</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <p>Clique em "Presentear o Casal"</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <p>Digite seu nome para reservar</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- CONVIDADOS -->
+    <!-- GALERIA DE INSPIRAÇÃO -->
+    <section class="card">
+      <h2><i class="fas fa-images"></i> Inspiração para Nosso Lar</h2>
+      <div class="galeria">
+        <div class="imagem-galeria">
+          <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cozinha moderna">
+          <p>Nosso estilo de cozinha</p>
+        </div>
+        <div class="imagem-galeria">
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Jantar romântico">
+          <p>Para jantares especiais</p>
+        </div>
+        <div class="imagem-galeria">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Decoração casal">
+          <p>Decoração do nosso lar</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LISTA DE CONVIDADOS -->
     <section class="card">
       <h2><i class="fas fa-users"></i> Amigos Confirmados</h2>
+      <p class="subtitle">Quem já confirmou presença:</p>
       <div class="convidados-lista" id="listaConvidados">
-        <p>Nenhuma confirmação ainda.</p>
+        <p>Nenhuma confirmação ainda. Seja o primeiro a confirmar!</p>
+      </div>
+    </section>
+
+    <!-- INFORMAÇÕES DO EVENTO -->
+    <section class="card event-details">
+      <h2><i class="fas fa-calendar-star"></i> Detalhes do Evento</h2>
+      <div class="details-grid">
+        <div class="detail-item">
+          <i class="fas fa-gift"></i>
+          <h3>Traga</h3>
+          <p>Além do presente, muita alegria e histórias para contar!</p>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-utensils"></i>
+          <h3>Traga Bebida</h3>
+          <p>Cervejas, drinks especiais e muita comemoração</p>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-music"></i>
+          <h3>Música</h3>
+          <p>Playlist especial do casal</p>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-camera"></i>
+          <h3>Fotos</h3>
+          <p>Registre os momentos especiais</p>
+        </div>
       </div>
     </section>
 
@@ -105,9 +186,13 @@
   <!-- RODAPÉ -->
   <footer>
     <div class="container">
+      <div class="footer-heart">
+        <i class="fas fa-heart"></i>
+      </div>
       <h3>Chá Bar - Taine & Caique</h3>
       <p>Celebrando amor e o início da nossa vida a dois ❤️</p>
-      <p><i class="fas fa-envelope"></i> cha.bar.taine.caique@gmail.com</p>
+     
+      </div>
       <p class="copyright">Com amor, Taine & Caique © 2026</p>
     </div>
   </footer>
